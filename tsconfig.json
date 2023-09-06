@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "outDir": ".build",
+    "lib": ["es2018"],
+    "rootDir": "./",
+    "target": "ES2018",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "moduleResolution":"node"
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

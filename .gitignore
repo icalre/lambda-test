@@ -1,0 +1,4 @@
+.idea
+.esbuild
+node_modules
+.env
