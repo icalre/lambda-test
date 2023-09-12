@@ -1,13 +1,28 @@
-import {UnauthorizedException} from "../exceptions";
 import {getConfig} from "../utilities";
-import * as jwt from 'jsonwebtoken';
 import {loggerUtility} from "../utilities";
 
 export const verifyToken = (event: any) => {
     try {
-        const token = event.authorization.replace("Bearer ", "");
-        if (!token) return new UnauthorizedException(401,'No autorizado.');
-        return jwt.verify(token, getConfig("SECRET_JWT"));
+        const { authorization } = event;
+
+        if (!authorization) {
+            return false;
+        }
+
+        const token =authorization.replace("Bearer ", "");
+
+        if(!token.startsWith('pk_test_')) {
+            return false;
+        }
+        if(token.length !== 24) {
+            return false;
+        }
+
+        if(token !== getConfig("SECRET")){
+            return false;
+        }
+
+        return true
     }catch (err){
         loggerUtility.info(err);
         return false;

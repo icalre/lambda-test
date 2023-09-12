@@ -23,4 +23,4 @@ const register = async (event: any) => {
         token:card_token
     });
 };
-export const handler = middy(register).use(jsonBodyParser()).use(cardMiddleware).use(authMiddleware());
+export const handler = middy(register).use(jsonBodyParser()).use(authMiddleware()).use(cardMiddleware);

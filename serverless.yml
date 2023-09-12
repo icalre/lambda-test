@@ -19,10 +19,6 @@ functions:
     handler: src/route/cardToken.handler
     events:
       - httpApi: GET /get-card
-  getToken:
-    handler: src/route/getAuthToken.handler
-    events:
-      - httpApi: GET /get-token
 
 custom:
   esbuild:

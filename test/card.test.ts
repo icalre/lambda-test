@@ -1,7 +1,7 @@
 import * as jestPlugin from 'serverless-jest-plugin';
 import * as getCardMod from '../src/route/cardToken';
 import * as registerCardMod from '../src/route/registerCard';
-import * as getAuthTokenMod from '../src/route/getAuthToken';
+import {getConfig} from "../src/utilities";
 
 const card_test = {
     email: "jronaldcll@gmail.com",
@@ -12,19 +12,11 @@ const card_test = {
 };
 
 describe('Api Test', () => {
-    const wrappedAuth = jestPlugin.lambdaWrapper.wrap(getAuthTokenMod, {handler: 'handler'});
     const wrappedRegisterCard = jestPlugin.lambdaWrapper.wrap(registerCardMod, {handler: 'handler'});
     const wrappedGetCard = jestPlugin.lambdaWrapper.wrap(getCardMod, {handler: 'handler'});
 
-    let auth_token: string = '';
+    let auth_token: string = getConfig("SECRET");
     let card_token: string = '';
-    it('Return JWT', () => {
-        return wrappedAuth.run({}).then((response: any) => {
-            const _data = JSON.parse(response.body);
-            auth_token = _data.token;
-            expect(response.statusCode).toEqual(200);
-        });
-    });
 
     it('Validate Card Number', () => {
         return wrappedRegisterCard.run({
